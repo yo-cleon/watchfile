@@ -1,8 +1,14 @@
 # Watchfile
 
-Aplicación para monitorizar la modificaicón de archivos en un determinado directorio.
+Aplicación para monitorizar la creación o modificación de archivos en un
+determinado directorio.
 
-##Requerimientos:
+## Requerimientos:
 + Python 3.7
 + Watchdog: https://github.com/gorakhargosh/watchdog
 + pyTelegramBotAPI: https://github.com/eternnoir/pyTelegramBotAPI
+
+## Uso:
+Clonar o descargar el proyecto: `git clone https://github.com/yo-cleon/watchfile`
+Modificar el archivo `\bin\config.ini` indicando en la clave ruta el path
+del directorio a monitorizar.
