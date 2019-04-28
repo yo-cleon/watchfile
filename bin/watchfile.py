@@ -8,6 +8,13 @@ import configparser
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler 
+fileConfig = ".\config.ini"
+
+if not os.path.exists(fileConfig):
+	try:
+		subprocess.call('python creaConfig.py')
+	except subprocess.CalledProcessError as e:
+		print ("Ha habido un error al crear el archivo de configuración: \n",e.output)
 
 #LEER ARCHIVO DE CONFIGURACIÓN PARA LOCALIZAR EL DIRECTORIO A MONITORIZAR
 configuracion = configparser.ConfigParser()
