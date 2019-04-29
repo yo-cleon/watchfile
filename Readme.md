@@ -13,3 +13,6 @@ Clonar o descargar el proyecto: `git clone https://github.com/yo-cleon/watchfile
 
 Modificar el archivo `\bin\config.ini` indicando en la clave ruta el path
 del directorio a monitorizar.
+
+## Temas pendientes:
+[] Añadir logs en los scrpts para revisar funcionamiento y problemas.
