@@ -15,4 +15,4 @@ Modificar el archivo `\bin\config.ini` indicando en la clave ruta el path
 del directorio a monitorizar.
 
 ## Temas pendientes:
-[] Añadir logs en los scrpts para revisar funcionamiento y problemas.
+[ ] Añadir logs en los scrpts para revisar funcionamiento y problemas.
