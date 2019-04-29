@@ -19,13 +19,15 @@ print("Inicio del envio del fichero: ", archivo)
 # ENVIO DEL ARCHIVO
 def env_archivo(f):
     try:
-        ftp = FTP(url,user,passw)
-        ftp.routeDestination = "/tmp"
-        ftp.storbinary("STOR %s" % archivo,open("%s%s" % (url,archivo)))
+        ftp = FTP(url, user, passw)
+        ftp.cwd(dir)
+        a = ftp.storbinary("STOR ejemplo.pdf", open(archivo, "rb"))
+        
         ftp.quit()
     except Exception as e:
         print(e)
-   
+
+
 # ANALIZAR SI HAY QUE REALIZAR EL ENVIO
 if primerEnvio.upper() == 'SI':
     configuracion.set('PARAMETROS', 'PrimerEnvio', 'NO')
@@ -35,7 +37,7 @@ if primerEnvio.upper() == 'SI':
     with open("reg.txt", "w") as registro:
         registro.write(str(horaEnvio))
     env_archivo(archivo)
-    print("Mensaje enviado")
+    print("Archivo subido al FTP")
 else:
     with open("reg.txt") as file:
         linea = file.readline()

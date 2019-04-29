@@ -6,19 +6,23 @@ import os
 
 print("Es necesario crear el archivo de configuración...")
 
-ruta = input("Introduce la ruta del directorio a monitorizar:")
+ruta=""
+while not os.path.exists(ruta):
+	ruta = input("Introduce la ruta del directorio a monitorizar:")
+	if not os.path.exists(ruta):
+		print("Error: directorio incorrecto. Vuelve a intentarlo.")
 tipoEnvio = input("Formato del envio de avisos (F = Ftp, T = Telegram):")
 
 print("Creando configuracion....")	
 cfg = configparser.ConfigParser()
 cfg.add_section("GENERAL")
 cfg.set("GENERAL","Ruta",ruta)
-cfg.set("GENERAL","PrimerEnvio","SI")
 cfg.set("GENERAL","TipoEnvio",tipoEnvio)
+cfg.set("GENERAL","PrimerEnvio","SI")
 cfg.set("GENERAL","Fichero","")
 with open("config.ini","w+") as archivo:
 	cfg.write(archivo)	
-if upper(tipoEnvio) == 'T':
+if tipoEnvio.upper() == 'T':
 	token = input("¿Cuál es el token del bot de Telegram a utilizar?")
 	numId = input("Por último, ¿cuál es el Id del grupo/usuario al que enviará los mensajes?")
 	cfg.add_section("TELEGRAM")
@@ -30,7 +34,7 @@ if upper(tipoEnvio) == 'T':
 	cfg.set("FTP","Password","")
 	with open("config.ini","w+") as archivo:
 		cfg.write(archivo)	
-elif upper(tipoEnvio) == 'F':
+elif tipoEnvio.upper() == 'F':
 	url = input("Introduce la dirección ftp: ")
 	user = input("Introduce el usuario: ")
 	passw = input("Por último, introduce la contraseña: ")
