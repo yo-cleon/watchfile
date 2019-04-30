@@ -1,9 +1,13 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import time
 from ftplib import FTP
 from bin.watchfile import configuracion
 from bin.watchfile import fc
+from utils import mylogger
+
+logger = mylogger.getLogger()
 
 # DATOS DEL FICHERO DE CONFIGURACION
 parametros = configuracion['FTP']
@@ -27,7 +31,8 @@ def env_archivo(f):
 
 
 # PROCESO DE SUBIDA DEL ARCHVIO
-print("Inicio del envio del fichero: ", archivo)
+# print("Inicio del envio del fichero: ", archivo)
+logger.info("enviaFtp: inicio del proceso de envío FTP del archivo: ", archivo)
 if primerEnvio.upper() == 'SI':
     configuracion.set('GENERAL', 'PrimerEnvio', 'NO')
     with open(fc, 'w+') as fc:
@@ -36,7 +41,8 @@ if primerEnvio.upper() == 'SI':
     with open("reg.txt", "w") as registro:
         registro.write(str(horaEnvio))
     env_archivo(archivo)
-    print("Archivo subido al FTP")
+    # print("Archivo subido al FTP")
+    logger.info("enviaFTP: Primer envío. Archivo subido correctamente.")
 else:
     with open("reg.txt") as file:
         linea = file.readline()
@@ -45,11 +51,14 @@ else:
         else:
             ultimoEnvio = 0
     actualEnvio = round(time.time())
-    tiempo = actualEnvio - ultimoEnvio
-    print("diferencia con el último envio: ", tiempo)
-    if (tiempo > 25):
+    difTiempo = actualEnvio - ultimoEnvio
+    # print("diferencia con el último envio: ", difTiempo)
+    logger.info("enviaFtp: Diferencia de tiempo con el último envío: ", difTiempo)
+    if difTiempo > 25:
         with open("reg.txt", "w") as f:
             f.write(str(actualEnvio))
         env_archivo(archivo)
+        logger.info("enviaFTP: Archivo subido correctamente.")
     else:
-        print("no ha pasado tiempo suficiente")
+        # print("no ha pasado tiempo suficiente")
+        logger.warning("enviaFtp: no ha pasado tiempo suficiente entre envíos. Envío anulado.")

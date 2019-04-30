@@ -112,3 +112,6 @@ venv.bak/
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+
+# ARCHIVOS LOG
+.log/*.*

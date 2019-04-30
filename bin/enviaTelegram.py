@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import configparser
 import sys
@@ -6,6 +7,9 @@ import telebot
 import time
 from bin.watchfile import configuracion
 from bin.watchfile import fc
+from utils import mylogger
+
+logger = mylogger.getLogger()
 
 # DATOS DEL FICHERO DE CONFIGURACION
 config = configuracion['GENERAL']
@@ -27,7 +31,8 @@ def env_archivo(f):
 
 
 # PROCESO DE ENVIO DEL ARCHIVO
-print("Inicio del envio del fichero: ", archivo)
+# print("Inicio del envio del fichero: ", archivo)
+logger.info("enviaTelegram: inicio del proceso de envío FTP del archivo: ", archivo)
 if primerEnvio.upper() == 'SI':
     configuracion.set('GENERAL', 'PrimerEnvio', 'NO')
     with open(fc, 'w+') as archivoConfig:
@@ -36,7 +41,8 @@ if primerEnvio.upper() == 'SI':
     with open("reg.txt", "w") as registro:
         registro.write(str(horaEnvio))
     env_archivo(archivo)
-    print("Mensaje enviado")
+    # print("Mensaje enviado")
+    logger.info("enviaTelegram: Primer envío. Archivo enviado correctamente.")
 else:
     with open("reg.txt") as registro:
         linea = registro.readline()
@@ -46,10 +52,13 @@ else:
             ultimoEnvio = 0
     actualEnvio = round(time.time())
     tiempo = actualEnvio - ultimoEnvio
-    print("diferencia con el último envio: ", tiempo)
+    # print("diferencia con el último envio: ", tiempo)
+    logger.info("enviaTelegram: Diferencia de tiempo con el último envío: ", difTiempo)
     if tiempo > 25:
         with open("reg.txt", "w") as registro:
             registro.write(str(actualEnvio))
         env_archivo(archivo)
+        logger.info("enviaTelegram: Archivo subido correctamente.")
     else:
-        print("no ha pasado tiempo suficiente")
+        # print("no ha pasado tiempo suficiente")
+        logger.warning("enviaTelegram: no ha pasado tiempo suficiente entre envíos. Envío anulado.")
