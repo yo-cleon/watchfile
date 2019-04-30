@@ -24,7 +24,7 @@ if not os.path.exists(fc):
 
 # LEER ARCHIVO DE CONFIGURACIÓN PARA LOCALIZAR EL DIRECTORIO A MONITORIZAR
 configuracion = configparser.ConfigParser()
-configuracion.read("fileConfig")
+configuracion.read(fc)
 confGeneral = configuracion['GENERAL']
 dir = confGeneral['Directorio']
 tipoEnvio = confGeneral['TipoEnvio']
