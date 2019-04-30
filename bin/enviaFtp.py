@@ -2,8 +2,8 @@
 
 import time
 from ftplib import FTP
-from watchfile import configuracion
-from watchfile import fileConfig
+from bin.watchfile import configuracion
+from bin.watchfile import fc
 
 # DATOS DEL FICHERO DE CONFIGURACION
 parametros = configuracion['FTP']
@@ -13,7 +13,6 @@ passw = parametros['Password']
 config = configuracion['GENERAL']
 archivo = config['fichero']
 primerEnvio = config['PrimerEnvio']
-print("Inicio del envio del fichero: ", archivo)
 
 
 # ENVIO DEL ARCHIVO
@@ -21,17 +20,17 @@ def env_archivo(f):
     try:
         ftp = FTP(url, user, passw)
         ftp.cwd(dir)
-        a = ftp.storbinary("STOR ejemplo.pdf", open(archivo, "rb"))
-        
+        ftp.storbinary("STOR ejemplo.pdf", open(archivo, "rb"))
         ftp.quit()
     except Exception as e:
         print(e)
 
 
-# ANALIZAR SI HAY QUE REALIZAR EL ENVIO
+# PROCESO DE SUBIDA DEL ARCHVIO
+print("Inicio del envio del fichero: ", archivo)
 if primerEnvio.upper() == 'SI':
-    configuracion.set('PARAMETROS', 'PrimerEnvio', 'NO')
-    with open(fileConfig, 'w+') as fc:
+    configuracion.set('GENERAL', 'PrimerEnvio', 'NO')
+    with open(fc, 'w+') as fc:
         configuracion.write(fc)
     horaEnvio = round(time.time())
     with open("reg.txt", "w") as registro:
