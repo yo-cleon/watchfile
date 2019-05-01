@@ -44,7 +44,8 @@ if tipoEnvio.upper() == 'T':
 elif tipoEnvio.upper() == 'F':
     url = input("Introduce la dirección ftp: ")
     user = input("Introduce el usuario: ")
-    passw = input("Por último, introduce la contraseña: ")
+    passw = input("Introduce la contraseña: ")
+    dir = input("Por último, establezca el directorio de destino de los archivos: ")
     cfg.add_section("TELEGRAM")
     cfg.set("TELEGRAM", "Token", "")
     cfg.set("TELEGRAM", "Id", "")

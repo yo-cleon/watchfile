@@ -5,8 +5,8 @@ import configparser
 import sys
 import telebot
 import time
-from bin.watchfile import configuracion
-from bin.watchfile import fc
+from watchfile import configuracion
+from watchfile import fc
 from utils import mylogger
 
 logger = mylogger.getLogger()
@@ -32,7 +32,7 @@ def env_archivo(f):
 
 # PROCESO DE ENVIO DEL ARCHIVO
 # print("Inicio del envio del fichero: ", archivo)
-logger.info("enviaTelegram: inicio del proceso de envío FTP del archivo: ", archivo)
+logger.info("enviaTelegram: inicio del proceso de envío por Telegram del archivo: %s", archivo)
 if primerEnvio.upper() == 'SI':
     configuracion.set('GENERAL', 'PrimerEnvio', 'NO')
     with open(fc, 'w+') as archivoConfig:
@@ -51,10 +51,10 @@ else:
         else:
             ultimoEnvio = 0
     actualEnvio = round(time.time())
-    tiempo = actualEnvio - ultimoEnvio
+    difTiempo = actualEnvio - ultimoEnvio
     # print("diferencia con el último envio: ", tiempo)
-    logger.info("enviaTelegram: Diferencia de tiempo con el último envío: ", difTiempo)
-    if tiempo > 25:
+    logger.info("enviaTelegram: Diferencia de tiempo con el último envío: %s", difTiempo)
+    if difTiempo > 25:
         with open("reg.txt", "w") as registro:
             registro.write(str(actualEnvio))
         env_archivo(archivo)
