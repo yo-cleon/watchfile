@@ -12,7 +12,7 @@ determinado directorio.
 Clonar o descargar el proyecto: `git clone https://github.com/yo-cleon/watchfile`
 
 Ejecutar de forma manual por primera vez el script con el comando:
-<pre><code>python watchfyle.py</code></pre>
+<pre><code>c:\python watchfyle.py</code></pre>
 
 Este paso es necesario para que se cree el archivo de configuración. Durante su creación,
 deberemos indicar el directorio a monitorizar, el tipo de envío del aviso y del archivo 
