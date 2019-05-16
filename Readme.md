@@ -11,9 +11,13 @@ determinado directorio.
 ## Uso:
 Clonar o descargar el proyecto: `git clone https://github.com/yo-cleon/watchfile`
 
-Modificar el archivo `\bin\config.ini` indicando en la clave ruta el path
-del directorio a monitorizar.
+Ejecutar de forma manual por primera vez el script con el comando:
+<pre><code>python watchfyle.py</code></pre>
 
-## Pendiente:
-- [ ] Añadir logs en los scrpts para revisar funcionamiento y problemas.
+Este paso es necesario para que se cree el archivo de configuración. Durante su creación,
+deberemos indicar el directorio a monitorizar, el tipo de envío del aviso y del archivo 
+a utilizar y los parámetros requeridos para el envío.
+
+## Mejoras:
+- [x] Añadir logs en los scrpts para revisar funcionamiento y problemas.
 - [ ] Permitir encriptado de información en el archivo de configuracion
